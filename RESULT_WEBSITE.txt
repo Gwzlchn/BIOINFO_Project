@@ -1,0 +1,53 @@
+########################################
+# Program: needle
+# Rundate: Tue 16 Oct 2018 10:03:12
+# Commandline: needle
+#    -auto
+#    -stdout
+#    -asequence emboss_needle-I20181016-100310-0654-25993765-p2m.asequence
+#    -bsequence emboss_needle-I20181016-100310-0654-25993765-p2m.bsequence
+#    -datafile EBLOSUM62
+#    -gapopen 10.0
+#    -gapextend 0.5
+#    -endopen 10.0
+#    -endextend 0.5
+#    -aformat3 pair
+#    -sprotein1
+#    -sprotein2
+# Align_format: pair
+# Report_file: stdout
+########################################
+
+#=======================================
+#
+# Aligned_sequences: 2
+# 1: HBA_HUMAN
+# 2: HBB_HUMAN
+# Matrix: EBLOSUM62
+# Gap_penalty: 10.0
+# Extend_penalty: 0.5
+#
+# Length: 149
+# Identity:      65/149 (43.6%)
+# Similarity:    90/149 (60.4%)
+# Gaps:           9/149 ( 6.0%)
+# Score: 292.5
+# 
+#
+#=======================================
+
+HBA_HUMAN          1 MV-LSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHF-D     48
+                     || |:|.:|:.|.|.||||  :..|.|.|||.|:.:.:|.|:.:|..| |
+HBB_HUMAN          1 MVHLTPEEKSAVTALWGKV--NVDEVGGEALGRLLVVYPWTQRFFESFGD     48
+
+HBA_HUMAN         49 LS-----HGSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLR     93
+                     ||     .|:.:||.|||||..|.::.:||:|::....:.||:||..||.
+HBB_HUMAN         49 LSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLH     98
+
+HBA_HUMAN         94 VDPVNFKLLSHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR    142
+                     |||.||:||.:.|:..||.|...||||.|.|:..|.:|.|:..|..||.
+HBB_HUMAN         99 VDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH    147
+
+
+#---------------------------------------
+#---------------------------------------
