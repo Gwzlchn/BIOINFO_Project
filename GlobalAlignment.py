@@ -1,4 +1,5 @@
 import ReadData as Data
+from other_written.matrix import BLOSUM62
 import numpy as np
 from collections import namedtuple
 
@@ -15,7 +16,7 @@ class ScoreParam:
     """Stores the parameters for an alignment scoring function"""
     def __init__(self,  gap_start, gap_extend , blosum_mat, biosum_index):
         self.gap_open = gap_start
-        self.gap_extend = gap_extend
+        self.gap_extend = self.gap_double = gap_extend
         # 打分矩阵
         self.blosum_mat = blosum_mat
         self.blosum_index = biosum_index
@@ -112,14 +113,15 @@ def global_alignment(seqs = Sequence_Pair(), score = ScoreParam(-10,-0.5,mat,ind
             I[i, j] = max(
                 F[i, j - 1] + score.gap_open,
                 I[i, j - 1] + score.gap_extend,
-                J[i, j - 1] + score.gap_extend)
+                J[i, j - 1] + score.gap_double)
             # J
             J[i, j] = max(
                 F[i - 1, j] + score.gap_open,
                 J[i - 1, j] + score.gap_extend,
-                I[i - 1, j] + score.gap_extend)
+                I[i - 1, j] + score.gap_double)
             # F
             diag_score = F[i - 1, j - 1] + score.get_two_char_score(ci,cj)
+            #diag_score = F[i - 1, j - 1] + BLOSUM62[ci][cj]
             left_score = I[i, j]
             up_score = J[i, j]
             max_score = max(diag_score, up_score, left_score)
@@ -143,6 +145,7 @@ def global_alignment(seqs = Sequence_Pair(), score = ScoreParam(-10,-0.5,mat,ind
                     pointer[i, j] = LEFT
                 else:
                     pointer[i, j] = DIAG
+    print(max_score)
     ij_pairs = []
     #### !!!!!!!!!!!!!!!!!!!!!!
     ##   !!!!!!!!!!!!!!!!!!!!

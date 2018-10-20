@@ -9,7 +9,7 @@ from collections import namedtuple
 import numpy as np
 
 from other_written.matrix import BLOSUM62
-
+import ReadData as rd
 
 __all__ = ["AlignmentResult", "aligner"]
 
@@ -25,7 +25,7 @@ AlignmentResult = namedtuple(
      'end1', 'end2', 'n_gaps1', 'n_gaps2',
      'n_mismatches', 'score'])
 
-
+mat, index = rd.Read_BLO_Matrix(file_name="../BLOSUM62.txt")
 def aligner(seqj, seqi, method='global', gap_open=-7, gap_extend=-7,
             gap_double=-7, matrix=BLOSUM62, max_hits=1):
     '''Calculates the alignment of two sequences.
@@ -74,8 +74,8 @@ def aligner(seqj, seqi, method='global', gap_open=-7, gap_extend=-7,
     else:
         flip = 0
 
-    seqi = seqi.encode() if not isinstance(seqi, bytes) else seqi
-    seqj = seqj.encode() if not isinstance(seqj, bytes) else seqj
+    #seqi = seqi.encode() if not isinstance(seqi, bytes) else seqi
+    #seqj = seqj.encode() if not isinstance(seqj, bytes) else seqj
 
     F = np.zeros((max_i + 1, max_j + 1), dtype=np.float32)
     I = np.ndarray((max_i + 1, max_j + 1), dtype=np.float32)
@@ -114,7 +114,8 @@ def aligner(seqj, seqi, method='global', gap_open=-7, gap_extend=-7,
                          J[i - 1, j] + gap_extend,
                          I[i - 1, j] + gap_double)
             # F
-            diag_score = F[i - 1, j - 1] + matrix[cj][ci]
+            #diag_score = F[i - 1, j - 1] + matrix[cj][ci]
+            diag_score = F[i - 1, j - 1]  + rd.get_Score_between_two_char(cj,ci)
             left_score = I[i, j]
             up_score = J[i, j]
             max_score = max(diag_score, up_score, left_score)
@@ -147,7 +148,7 @@ def aligner(seqj, seqi, method='global', gap_open=-7, gap_extend=-7,
                     pointer[i, j] = LEFT
                 else:
                     pointer[i, j] = DIAG
-
+    print(max_score)
     # container for traceback coordinates
     ij_pairs = []
     if method == 'local':
