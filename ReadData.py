@@ -50,8 +50,8 @@ def Read_BLO_Matrix(file_name: str = "BLOSUM62.txt") -> np.ndarray and dict:
     return BLOSUM_Matrix, BLOSUM_Index_Dic
 
 
-def get_Score_between_two_char(a: chr, b: chr) -> int:
-    mat, index = Read_BLO_Matrix("../BLOSUM62.txt")
+def get_Score_between_two_char(a: chr, b: chr, mat: np.ndarray , index) -> int:
+    mat, index = Read_BLO_Matrix()
     a_index = index[a.upper()]
     ret_list = mat[a_index]
     return ret_list[index[b.upper()]]
