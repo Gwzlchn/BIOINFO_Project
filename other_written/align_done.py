@@ -74,8 +74,8 @@ def aligner(seqj, seqi, method='global', gap_open=-7, gap_extend=-7,
     else:
         flip = 0
 
-    #seqi = seqi.encode() if not isinstance(seqi, bytes) else seqi
-    #seqj = seqj.encode() if not isinstance(seqj, bytes) else seqj
+    seqi = seqi.encode() if not isinstance(seqi, bytes) else seqi
+    seqj = seqj.encode() if not isinstance(seqj, bytes) else seqj
 
     F = np.zeros((max_i + 1, max_j + 1), dtype=np.float32)
     I = np.ndarray((max_i + 1, max_j + 1), dtype=np.float32)
@@ -114,8 +114,8 @@ def aligner(seqj, seqi, method='global', gap_open=-7, gap_extend=-7,
                          J[i - 1, j] + gap_extend,
                          I[i - 1, j] + gap_double)
             # F
-            #diag_score = F[i - 1, j - 1] + matrix[cj][ci]
-            diag_score = F[i - 1, j - 1]  + rd.get_Score_between_two_char(cj,ci)
+            diag_score = F[i - 1, j - 1] + matrix[cj][ci]
+            #diag_score = F[i - 1, j - 1]  + rd.get_Score_between_two_char(cj,ci)
             left_score = I[i, j]
             up_score = J[i, j]
             max_score = max(diag_score, up_score, left_score)
@@ -279,6 +279,6 @@ seq2 = "MVHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDL"+\
 "VKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGN"+\
 "VLVCVLAHHFG"+\
 "KEFTPPVQAAYQKVVAGVANALAHKYH"
-alg = aligner(seq1,seq2, method="global", gap_open=-10,gap_extend=-0.5,gap_double=-10,max_hits=2)
+alg = aligner(seq1,seq2, method="local", gap_open=-10,gap_extend=-0.5,gap_double=-10,max_hits=2)
 print(alg)
 alg = aligner('ARAAV','ARAVVVARAV', method="local", gap_open=-10,gap_extend=-0.5,gap_double=-10,max_hits=2)
