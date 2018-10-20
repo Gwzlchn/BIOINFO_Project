@@ -1,6 +1,10 @@
 from typing import Dict
 import numpy as np
 
+a1 = "MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSHGSAQVKGHG"+\
+"KKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLLSHCLLV"+\
+"TLAAHLPAEFTP"+\
+"AVHASLDKFLASVSTVLTSKYR"
 
 def Read_Two_Seq(file_name: str = "Sequence.txt") -> list:
     Seq = ["", ""]
@@ -14,6 +18,7 @@ def Read_Two_Seq(file_name: str = "Sequence.txt") -> list:
             continue
         Seq[Seq_cnt] += line.strip('\n')
     f.close()
+    assert Seq[0] == a1
     return Seq
 
 
@@ -45,10 +50,10 @@ def Read_BLO_Matrix(file_name: str = "BLOSUM62.txt") -> np.ndarray and dict:
     return BLOSUM_Matrix, BLOSUM_Index_Dic
 
 
-def get_Score_between_to_char(a: chr, b: chr) -> int:
-    mat, index = Read_BLO_Matrix()
+def get_Score_between_two_char(a: chr, b: chr, mat: np.ndarray, index: Dict) -> int:
+    #mat, index = Read_BLO_Matrix()
     a_index = index[a.upper()]
     ret_list = mat[a_index]
     return ret_list[index[b.upper()]]
 
-# print(get_Score_between_to_char('r','r'))
+#print(get_Score_between_to_char('r','r'))
