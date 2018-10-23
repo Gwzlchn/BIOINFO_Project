@@ -15,7 +15,6 @@ class AlignmentResult:
                  start1:int, start2:int,end1:int,end2:int,
                  n_gap1:int, n_gap2:int,n_mismatches:int,
                  score:float):
-
         self.seq1 = seq1
         self.seq2 =seq2
         self.seq_res = seq_res
@@ -75,7 +74,7 @@ def aligner( seq_pair:list, matrix:np.ndarray , mat_index:dict,
 
     max_j = len(seqj)
     max_i = len(seqi)
-
+    
     if max_j > max_i:
         flip = 1
         seqi, seqj = seqj, seqi
@@ -163,7 +162,7 @@ def aligner( seq_pair:list, matrix:np.ndarray , mat_index:dict,
             end_i, end_j = max_i, max_j
         else:
             end_i, end_j = i, j
-        n_gaps_i, n_gaps_j, n_mmatch = 0, 0, 0
+        n_gaps_i, n_gaps_j, n_mmat-ch = 0, 0, 0
         seq_result = []
         while p != NONE:
             if p == DIAG:
